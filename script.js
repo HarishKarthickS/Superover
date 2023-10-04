@@ -5,6 +5,8 @@ const $team1Wickets = document.getElementById("wickets-team1");
 const $team2Score = document.getElementById("score-team2");
 const $team2Wickets = document.getElementById("wickets-team2");
 
+const strikeAudio = new Audio("http://bit.ly/so-ball-hit");
+const gameOverAudio = new Audio("http://bit.ly/so-crowd-cheer");
 
 var team1Score = 0;
 var team1Wickets = 0;
@@ -17,7 +19,7 @@ var turn = 1;
 const possibleOutcomes = [0, 1, 2, 3, 4, 6, "W"];
 
 function gameOver() {
-
+  gameOverAudio.play();
   if (team1Score > team2Score) alert("IND wins");
   if (team2Score > team1Score) alert("PAK wins");
   if (team2Score === team1Score) alert("It is another superover!");
@@ -35,7 +37,10 @@ resetButton.onclick = () => {
 };
 
 strikeButton.onclick = () => {
-
+  //play audio
+  strikeAudio.pause();
+  strikeAudio.currentTime = 0;
+  strikeAudio.play();
 
   //generate random strike value
   const randomElement =
